@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sammy Tran - Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #e2e8f0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #f1f5f9, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #f1f5f9, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            color: #3b82f6;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card .meta {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Resume Download */
+        .resume-download {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* GitHub Repos */
+        .repo-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .repo-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateX(5px);
+        }
+
+        .repo-title {
+            color: #3b82f6;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .repo-description {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .repo-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(100, 116, 139, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: #94a3b8;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #3b82f6;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Sammy Tran</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Sammy Tran</h1>
+            <p class="subtitle">Software Development Engineer</p>
+            <a href="#about" class="cta-button">Explore My Work</a>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="card" style="max-width: 800px; margin: 0 auto;">
+                <p>I'm a Software Development Engineer with experience at Amazon Web Services, specializing in
+                    distributed systems and cloud infrastructure. I have expertise in Java, Python, and AWS services,
+                    with a passion for building scalable backend systems and optimizing performance. I enjoy solving
+                    complex problems in distributed computing and have experience with EMR clusters, storage
+                    optimization, and system reliability.</p>
+                <div style="margin-top: 2rem;">
+                    <h4 style="color: #3b82f6; margin-bottom: 1rem;">Technical Skills</h4>
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; font-size: 0.9rem;">
+                        <div>
+                            <strong>Languages:</strong><br>
+                            Java, C++, Python, SQL, Go, Redis
+                        </div>
+                        <div>
+                            <strong>Cloud & Infrastructure:</strong><br>
+                            AWS (EC2, S3, EMR, CloudWatch, IAM), Docker, Linux
+                        </div>
+                        <div>
+                            <strong>Frameworks & Tools:</strong><br>
+                            Apache Maven, Log4J, Hadoop, HDFS
+                        </div>
+                        <div>
+                            <strong>Version Control:</strong><br>
+                            Git, GitHub, CI/CD Pipeline
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resume-download">
+                <a href="./resume.pdf" class="download-btn">
+                    📄 Download Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/120px-Amazon_Web_Services_Logo.svg.png"
+                            alt="AWS Logo" style="width: 50px; height: auto; object-fit: contain;">
+                        <div>
+                            <h3 style="margin: 0;">Software Development Engineer</h3>
+                        </div>
+                    </div>
+                    <div class="meta">Amazon Web Services (Amazon EMR) • Apr 2022 - July 2023 • Seattle, WA</div>
+                    <p>Developed features in Java for interconnected EC2 Linux instances within EMR clusters,
+                        collaborating with cross-functional teams to align with business objectives. Optimized
+                        distributed file tracking systems and log uploading algorithms to S3, reducing data loss
+                        incidents by 5%. Resolved 90% of support tickets within 24 hours and assisted in onboarding new
+                        engineers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Seal_of_the_University_of_California%2C_San_Diego.svg"
+                            alt="UCSD Logo"
+                            style="width: 50px; height: 50px; object-fit: contain; background: white; border-radius: 8px; padding: 4px;">
+                        <div>
+                            <h3 style="margin: 0;">Bachelor of Science in Mathematics–Computer Science</h3>
+                        </div>
+                    </div>
+                    <div class="meta">University of California, San Diego • June 2020 • La Jolla, CA</div>
+                    <p>Graduated with a degree combining mathematical foundations with computer science principles,
+                        providing strong analytical and problem-solving skills essential for software engineering.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">GitHub Projects</h2>
+            <div id="github-repos">
+                <!-- GitHub repos will be loaded here -->
+                <div class="repo-card">
+                    <div class="repo-title">Receipt Processing Backend System</div>
+                    <div class="repo-description">Designed and implemented a backend system to process receipt data and
+                        calculate points with robust API validation and optimized performance for large-scale data
+                        processing.</div>
+                    <div class="repo-stats">
+                        <span>📅 Feb 2025 - Mar 2025</span>
+                        <span>📝 Backend System</span>
+                    </div>
+                </div>
+
+                <div class="repo-card">
+                    <div class="repo-title">URL Shortening Service</div>
+                    <div class="repo-description">Built scalable URL shortening service with analytics, comprehensive
+                        testing, persistent storage, and performance optimization. Currently expanding to distributed
+                        architecture with load balancing.</div>
+                    <div class="repo-stats">
+                        <span>📅 May 2025 - Present</span>
+                        <span>📝 Distributed Systems</span>
+                    </div>
+                </div>
+
+                <div class="repo-card">
+                    <div class="repo-title">Autocomplete Command Line Program</div>
+                    <div class="repo-description">Developed an autocomplete feature for dictionary searching with word
+                        completion suggestions. Automated builds with Meson, debugged with GDB, and optimized memory
+                        usage with Valgrind.</div>
+                    <div class="repo-stats">
+                        <span>📝 C++</span>
+                        <span>🔧 Meson, GDB, Valgrind</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://github.com/sammyqtran" class="cta-button" target="_blank">View All Projects on
+                    GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/sammyqtran" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/psammyqtran" target="_blank">LinkedIn</a>
+                <a href="mailto:sammyqtran@gmail.com">Email</a>
+                <a href="https://hisammytran.github.io" target="_blank">Website</a>
+            </div>
+            <p>&copy; 2025 Sammy Tran. Hosted on GitHub Pages.</p>
+            <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.5rem;">San Jose, CA</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Optional: Load GitHub repos dynamically
+        // Uncomment and modify the following code to fetch your actual GitHub repos
+
+        async function loadGitHubRepos() {
+            try {
+                const response = await fetch('https://api.github.com/users/sammyqtran/repos?sort=updated&per_page=10');
+                const repos = await response.json();
+
+                const reposContainer = document.getElementById('github-repos');
+                reposContainer.innerHTML = '';
+
+                repos.forEach(repo => {
+                    const repoCard = document.createElement('div');
+                    repoCard.className = 'repo-card';
+                    repoCard.innerHTML = `
+                        <div class="repo-title">${repo.name}</div>
+                        <div class="repo-description">${repo.description || 'No description available'}</div>
+                        <div class="repo-stats">
+                            <span>⭐ ${repo.stargazers_count}</span>
+                            <span>🍴 ${repo.forks_count}</span>
+                            <span>📝 ${repo.language || 'Unknown'}</span>
+                        </div>
+                    `;
+                    repoCard.addEventListener('click', () => {
+                        window.open(repo.html_url, '_blank');
+                    });
+                    repoCard.style.cursor = 'pointer';
+                    reposContainer.appendChild(repoCard);
+                });
+            } catch (error) {
+                console.error('Error loading GitHub repos:', error);
+            }
+        }
+
+        // Load repos when page loads
+        window.addEventListener('load', loadGitHubRepos);
+
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(15, 23, 42, 0.98)';
+            } else {
+                header.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
+        });
+    </script>
+</body>
+
+</html>
