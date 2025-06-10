@@ -17,7 +17,6 @@ Clean, professional portfolio site built with modern HTML, CSS, and JavaScript. 
 - HTML5
 - CSS3 (Flexbox/Grid, animations, media queries)
 - Vanilla JavaScript
-- [Add any other technologies you used]
 
 ## Getting Started
 Simply open `index.html` in your browser or serve via a local web server:
